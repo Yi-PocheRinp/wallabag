@@ -84,6 +84,26 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'archived' => true,
                 'tags' => ['bar-tag'],
             ],
+            'entry-search-admin' => [
+                'user' => 'admin-user',
+                'url' => 'http://0.0.0.0/entry-search-admin',
+                'reading_time' => 8,
+                'domain' => 'domain.io',
+                'mime' => 'text/html',
+                'title' => 'test title entry search admin',
+                'content' => 'This is my content /o/',
+                'language' => 'en',
+            ],
+            'entry-search-bob' => [
+                'user' => 'bob-user',
+                'url' => 'http://0.0.0.0/entry-search-bob',
+                'reading_time' => 8,
+                'domain' => 'domain.io',
+                'mime' => 'text/html',
+                'title' => 'test title entry search bob',
+                'content' => 'This is my content /o/',
+                'language' => 'en',
+            ],
         ];
 
         foreach ($entries as $reference => $item) {

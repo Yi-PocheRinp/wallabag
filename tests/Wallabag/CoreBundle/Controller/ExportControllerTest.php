@@ -243,6 +243,26 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertContains('foo', $content[0]['tags']);
     }
 
+    public function testJsonExportFromSearch()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        ob_start();
+        $crawler = $client->request('GET', '/export/search.json?search_entry[term]=entry+search&currentRoute=homepage');
+        ob_end_clean();
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $headers = $client->getResponse()->headers;
+        $this->assertSame('application/json', $headers->get('content-type'));
+        $this->assertSame('attachment; filename="Search entry search articles.json"', $headers->get('content-disposition'));
+        $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+        $this->assertEquals(1, $content);
+    }
+
     public function testXmlExport()
     {
         $this->logInAs('admin');
